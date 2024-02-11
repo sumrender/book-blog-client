@@ -1,0 +1,14 @@
+<div class="container mx-auto p-4">
+  <h1 class="text-3xl font-bold mb-8">Latest Blogs</h1>
+
+  <div
+    *ngFor="let blog of blogs"
+    class="bg-white shadow-lg rounded-lg p-6 mb-4"
+  >
+    <h2 (click)="goToBlog(blog)" class="text-xl font-semibold mb-4 cursor-pointer hover:underline">
+      {{ blog.title }}
+    </h2>
+    <p class="text-gray-600 mb-4">{{ blog.createdAt | date : "medium" }}</p>
+    <p class="text-gray-800">{{ blog.content }}</p>
+  </div>
+</div>

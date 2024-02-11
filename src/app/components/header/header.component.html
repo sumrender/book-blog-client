@@ -1,0 +1,42 @@
+<!-- header.component.html -->
+<header class="bg-blue-500 p-4 flex justify-between items-center">
+  <a routerLink="" class="flex items-center">
+    <img
+      src="../../../assets/bookworm.png"
+      alt="Logo"
+      class="h-8 w-auto mr-4"
+    />
+  </a>
+
+  <div class="hidden md:flex space-x-4">
+    <a routerLink="blogs" class="text-white">All Posts</a>
+    <a routerLink="blogs/new" class="text-white">New Post</a>
+
+    <ng-container *ngIf="!(loggedIn | async)">
+      <a routerLink="users/login" class="text-white">Log in</a>
+      <a routerLink="users/signup" class="text-white">Sign Up</a>
+    </ng-container>
+
+    <ng-container *ngIf="loggedIn | async">
+      <a routerLink="users/profile" class="text-white">My Account</a>
+      <p (click)="handleLogout()" class="text-white cursor-pointer">Log out</p>
+    </ng-container>
+  </div>
+</header>
+
+<div class="md:hidden">
+  <div class="flex flex-col items-center space-y-2 mt-4">
+    <a routerLink="blogs" class="text-white">All Posts</a>
+    <a routerLink="blogs/new" class="text-white">New Post</a>
+
+    <ng-container *ngIf="!(loggedIn | async)">
+      <a routerLink="users/login" class="text-white">Log in</a>
+      <a routerLink="users/signup" class="text-white">Sign Up</a>
+    </ng-container>
+
+    <ng-container *ngIf="loggedIn | async">
+      <a routerLink="users/profile" class="text-white">My Account</a>
+      <p (click)="handleLogout()" class="text-white cursor-pointer">Log out</p>
+    </ng-container>
+  </div>
+</div>
