@@ -4,7 +4,7 @@ import { BrowserModule } from '@angular/platform-browser';
 import { AppComponent } from './app.component';
 import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import { RouterModule, Routes } from '@angular/router';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HeaderComponent } from './components/header/header.component';
 import { BlogsComponent } from './pages/blogs/blogs.component';
 import { BlogComponent } from './pages/blog/blog.component';
@@ -15,6 +15,8 @@ import { ProfileComponent } from './pages/profile/profile.component';
 import { AuthGuard } from './guards/auth.guard';
 import { NotAuthGuard } from './guards/not-auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
+import { AngularEditorModule } from '@kolkov/angular-editor';
+import { BlogFormComponent } from './pages/blog-form/blog-form.component';
 
 const routes: Routes = [
   {
@@ -29,7 +31,7 @@ const routes: Routes = [
   },
   {
     path: 'blogs/new',
-    component: BlogComponent,
+    component: BlogFormComponent,
     canActivate: [AuthGuard],
   },
   {
@@ -63,11 +65,14 @@ const routes: Routes = [
     LoginComponent,
     SignupComponent,
     ProfileComponent,
+    BlogFormComponent,
   ],
   imports: [
     BrowserModule,
     HttpClientModule,
     FormsModule,
+    ReactiveFormsModule,
+    AngularEditorModule,
     RouterModule.forRoot(routes),
   ],
   providers: [

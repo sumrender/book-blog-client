@@ -29,7 +29,11 @@ export class AuthService {
         this.router.navigate(['']);
       },
       error: (e) => {
-        this.error = 'handle different login cases';
+        if (e.status === 400) {
+          this.error = 'Incorrect credentials!';
+        } else {
+          this.error = 'Something went wrong.';
+        }
         this.userSubject.next(null);
       },
     });
@@ -39,17 +43,28 @@ export class AuthService {
     return !!this.userSubject.value;
   }
 
-  signup(email: string, password: string) {
+  getError() {
+    return this.error;
+  }
+
+  signup(email: string, password: string, name: string) {
     this.error = '';
 
-    this.apiService.signup(email, password).subscribe({
+    this.apiService.signup(email, password, name).subscribe({
       next: (authPayload) => {
         this.userSubject.next(authPayload.user);
         localStorage.setItem('token', authPayload.token);
         this.router.navigate(['']);
       },
       error: (e) => {
-        this.error = 'handle different signup cases';
+        if (e.error.error.includes('Email already in use')) {
+          this.error = 'This email is already in use';
+        } else if (e.error.error.includes('Password not strong enough')) {
+          this.error = e.error.error;
+        } else {
+          this.error = 'Something went wrong.';
+        }
+        console.log('signup error', e);
         this.userSubject.next(null);
       },
     });

@@ -1,0 +1,30 @@
+<div class="min-h-screen md:mx-8 mx-auto p-4">
+  <div class="mx-auto p-4 lg:w-2/3">
+    <div class="bg-white shadow-lg rounded-lg p-6">
+      <label for="blogTitle" class="block mb-2">Blog Title:</label>
+      <input
+        type="text"
+        id="blogTitle"
+        [(ngModel)]="blogTitle"
+        class="w-full border rounded-md px-3 py-2 mb-4"
+      />
+
+      <label for="blogContent" class="block mb-2">Blog Content:</label>
+      <angular-editor
+        [placeholder]="'Enter blog content...'"
+        [(ngModel)]="blogContent"
+        [config]="editorConfig"
+        class="w-full border rounded-md px-3 py-2 mb-4"
+      ></angular-editor>
+
+      <div class="flex space-x-2">
+        <button
+          (click)="createBlog()"
+          class="bg-green-500 text-white px-4 py-2 rounded-md"
+        >
+          Create Blog
+        </button>
+      </div>
+    </div>
+  </div>
+</div>

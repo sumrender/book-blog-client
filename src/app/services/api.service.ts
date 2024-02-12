@@ -19,17 +19,23 @@ export class ApiService {
   }
 
   createBlog(blog: CreateBlog) {
+    console.log('create blog post called');
     return this.httpClient.post<Blog>(`${this.url}/blogs`, blog);
   }
 
   updateBlog(id: string, blog: Partial<CreateBlog>) {
-    return this.httpClient.post<Blog>(`${this.url}/blogs/${id}`, blog);
+    return this.httpClient.patch<Blog>(`${this.url}/blogs/${id}`, blog);
   }
 
-  signup(email: string, password: string) {
+  deleteBlog(id: string) {
+    return this.httpClient.delete<Blog>(`${this.url}/blogs/${id}`);
+  }
+
+  signup(email: string, password: string, name: string) {
     return this.httpClient.post<AuthPayload>(`${this.url}/users/signup`, {
       email,
       password,
+      name,
     });
   }
 

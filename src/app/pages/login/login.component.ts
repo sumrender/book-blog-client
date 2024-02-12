@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { AuthService } from 'src/app/services/auth.service';
 
 @Component({
@@ -6,15 +7,38 @@ import { AuthService } from 'src/app/services/auth.service';
   templateUrl: './login.component.html',
   styleUrls: ['./login.component.scss'],
 })
-export class LoginComponent {
-  email: string = '';
-  password: string = '';
+export class LoginComponent implements OnInit {
+  loginForm!: FormGroup;
 
-  constructor(private readonly authService: AuthService) {}
+  constructor(
+    private readonly authService: AuthService,
+    private fb: FormBuilder
+  ) {}
+
+  ngOnInit() {
+    this.loginForm = this.fb.group({
+      email: ['', [Validators.required, Validators.email]],
+      password: ['', [Validators.required, Validators.minLength(6)]],
+    });
+  }
+
+  get email() {
+    return this.loginForm.get('email');
+  }
+
+  get password() {
+    return this.loginForm.get('password');
+  }
 
   onSubmit() {
-    console.log('Email:', this.email);
-    console.log('Password:', this.password);
-    this.authService.login(this.email, this.password);
+    if (this.loginForm.valid) {
+      console.log('Form submitted:', this.loginForm.value);
+      this.authService.login(
+        this.loginForm.value.email,
+        this.loginForm.value.password
+      );
+    } else {
+      this.loginForm.markAllAsTouched();
+    }
   }
 }
