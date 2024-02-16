@@ -9,19 +9,11 @@ import { Subscription } from 'rxjs';
 })
 export class AppComponent {
   token: string = localStorage.getItem('token') || '';
-  private userSubscription!: Subscription;
   constructor(private authService: AuthService) {}
 
   ngOnInit() {
     if (this.token) {
       this.authService.profile();
     }
-    this.userSubscription = this.authService.user.subscribe((user) => {
-      console.log('user:', user);
-    });
-  }
-
-  ngOnDestroy() {
-    this.userSubscription.unsubscribe();
   }
 }

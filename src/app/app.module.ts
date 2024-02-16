@@ -25,15 +25,16 @@ const routes: Routes = [
     title: 'Home',
   },
   {
-    path: 'blogs',
-    component: BlogsComponent,
-    title: 'Blogs',
-  },
-  {
     path: 'blogs/new',
     component: BlogFormComponent,
     canActivate: [AuthGuard],
   },
+  {
+    path: 'blogs',
+    component: BlogsComponent,
+    title: 'Blogs',
+  },
+
   {
     path: 'blogs/:id',
     component: BlogComponent,

@@ -9,24 +9,40 @@
     </a>
 
     <div class="hidden md:flex space-x-8 mr-16">
-      <a routerLink="blogs" class="hover:underline text-xl font-bold"
+      <a
+        routerLink="blogs"
+        routerLinkActive="text-indigo-600 font-extrabold underline"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="hover:underline text-xl font-bold"
         >All Posts</a
       >
-      <a routerLink="blogs/new" class="hover:underline text-xl font-bold"
+      <a
+        routerLink="blogs/new"
+        routerLinkActive="text-indigo-600 font-extrabold underline"
+        class="hover:underline text-xl font-bold"
         >New Post</a
       >
 
       <ng-container *ngIf="!(loggedIn | async)">
-        <a routerLink="users/login" class="hover:underline text-xl font-bold"
+        <a
+          routerLink="users/login"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-xl font-bold"
           >Log in</a
         >
-        <a routerLink="users/signup" class="hover:underline text-xl font-bold"
+        <a
+          routerLink="users/signup"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-xl font-bold"
           >Sign Up</a
         >
       </ng-container>
 
       <ng-container *ngIf="loggedIn | async">
-        <a routerLink="users/profile" class="hover:underline text-xl font-bold"
+        <a
+          routerLink="users/profile"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-xl font-bold"
           >My Account</a
         >
         <p
@@ -48,26 +64,47 @@
           class="h-24 w-auto my-8"
         />
       </a>
-      <a routerLink="blogs" class="hover:underline text-lg font-bold"
-        >All Posts</a
+      <a
+        routerLink="blogs"
+        routerLinkActive="text-indigo-600 font-extrabold underline"
+        [routerLinkActiveOptions]="{ exact: true }"
+        class="hover:underline text-lg font-bold"
       >
-      <a routerLink="blogs/new" class="hover:underline text-lg font-bold"
-        >New Post</a
+        All Posts
+      </a>
+      <a
+        routerLink="blogs/new"
+        routerLinkActive="text-indigo-600 font-extrabold underline"
+        class="hover:underline text-lg font-bold"
       >
+        New Post
+      </a>
 
       <ng-container *ngIf="!(loggedIn | async)">
-        <a routerLink="users/login" class="hover:underline text-lg font-bold"
-          >Log in</a
+        <a
+          routerLink="users/login"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-lg font-bold"
         >
-        <a routerLink="users/signup" class="hover:underline text-lg font-bold"
-          >Sign Up</a
+          Log in
+        </a>
+        <a
+          routerLink="users/signup"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-lg font-bold"
         >
+          Sign Up
+        </a>
       </ng-container>
 
       <ng-container *ngIf="loggedIn | async">
-        <a routerLink="users/profile" class="hover:underline text-lg font-bold"
-          >My Account</a
+        <a
+          routerLink="users/profile"
+          routerLinkActive="text-indigo-600 font-extrabold underline"
+          class="hover:underline text-lg font-bold"
         >
+          My Account
+        </a>
         <p
           (click)="handleLogout()"
           class="cursor-pointer hover:underline text-lg font-bold"

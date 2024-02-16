@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
 import { ActivatedRoute, Router } from '@angular/router';
 import { ApiService } from 'src/app/services/api.service';
+import { AuthService } from 'src/app/services/auth.service';
 import { Blog } from 'src/models/blog.model';
+import { User } from 'src/models/user.model';
 
 @Component({
   selector: 'app-blog',
@@ -11,6 +13,7 @@ import { Blog } from 'src/models/blog.model';
 export class BlogComponent {
   id: string = '';
   blog: Blog | undefined;
+  user: User | undefined | null;
 
   updateBlog: boolean = false;
   updatedBlogTitle: string = '';
@@ -25,6 +28,7 @@ export class BlogComponent {
   constructor(
     private route: ActivatedRoute,
     private apiService: ApiService,
+    private authService: AuthService,
     private router: Router
   ) {}
 
@@ -35,6 +39,10 @@ export class BlogComponent {
         this.blog = blog;
       });
     });
+
+    this.authService.user.subscribe((user) => {
+      this.user = user;
+    })
   }
 
   toggleUpdateBlog() {

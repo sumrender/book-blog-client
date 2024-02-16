@@ -23,14 +23,12 @@ export class NotAuthGuard implements CanActivate {
     | Promise<boolean | UrlTree>
     | boolean
     | UrlTree {
-      return this.authService.user.pipe(
-        take(1),
-        map(user => {
-          const bool = !user;
-          console.log("not auth guard:", user);
-          console.log("not auth guard flag:", bool);
-          return bool;
-        })
-      );
+    return this.authService.user.pipe(
+      take(1),
+      map((user) => {
+        if (user) return this.router.createUrlTree(['']);
+        return true;
+      })
+    );
   }
 }
